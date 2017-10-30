@@ -68,8 +68,3 @@ Now you can call the service:
 curl --user aladdin:open-sesame http://kong:8001/headers
 
 ```
-
-
-This template was designed to work with the `kong-vagrant` 
-[development environment](https://github.com/Mashape/kong-vagrant). Please
-checkout that repos `readme` for usage instructions.
