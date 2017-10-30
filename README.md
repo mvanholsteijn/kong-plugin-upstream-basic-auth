@@ -1,4 +1,4 @@
-#Kong plugin upstream-basic-auth
+# Kong plugin upstream-basic-auth
 
 This repository contains a Kong plugin to insert a basic authentication header
 to the upstream for authenticated consumers.
