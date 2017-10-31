@@ -6,7 +6,6 @@ to the upstream for authenticated consumers.
 
 ## Configuration
 Configuring the plugin is straightforward, you can add it on top of an API by executing the following request on your Kong server:
-
 ```
 curl -X POST http://kong:8001/apis/{api}/plugins \
     --data "name=upstream-basic-auth" 
@@ -42,20 +41,17 @@ curl -X POST http://kong:8001/consumers/aladdin/basic-auth \
 ```
 
 Now we can call the service:
-
 ```
 curl --user aladdin:open-sesame http://kong:8000/headers
 ```
 
 Now we can add the upstream basic authentication plugin:
-
 ```
 curl -X POST http://kong:8001/apis/headers-api/plugins \
 	--data name=upstream-basic-auth 
 ```
 
 and add the credential to the consumer aladdin that we would like to pass to the upstream service:
-
 ```
 curl -X POST http://kong:8001/consumers/aladdin/upstream-basic-auth \
     --data username=genie \
@@ -63,8 +59,22 @@ curl -X POST http://kong:8001/consumers/aladdin/upstream-basic-auth \
 ```
 
 Now you can call the service:
-
 ```
 curl --user aladdin:open-sesame http://kong:8001/headers
+```
 
+## Installation
+To install the plugin, type:
+```
+luarocks install kong-plugin-upstream-basic-auth
+```
+And add the custom plugin to the `kong.conf` file (e.g. `/etc/kong/kong.conf`)
+```
+custom_plugins = upstream-basic-auth
+```
+Create the required database tables, by running:
+```
+kong stop
+kong migrations up
+kong start
 ```
