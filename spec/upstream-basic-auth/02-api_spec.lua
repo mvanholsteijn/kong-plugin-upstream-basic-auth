@@ -19,6 +19,9 @@ describe("Plugin: upstream-basic-auth (API)", function()
       consumer = assert(helpers.dao.consumers:insert {
         username = "bob"
       })
+      assert(helpers.dao.consumers:insert {
+        username = "nancy"
+      })
     end)
     after_each(function()
       helpers.dao:truncate_table("upstreambasicauth_credentials")
@@ -57,7 +60,7 @@ describe("Plugin: upstream-basic-auth (API)", function()
           local json = cjson.decode(body)
           assert.same({ password = "password is required", username = "username is required" }, json)
         end)
-        it("cannot create two identical usernames", function()
+        it("can use identical usernames", function()
           local res = assert(admin_client:send {
             method = "POST",
             path = "/consumers/bob/upstream-basic-auth",
@@ -74,7 +77,7 @@ describe("Plugin: upstream-basic-auth (API)", function()
 
           local res = assert(admin_client:send {
             method = "POST",
-            path = "/consumers/bob/upstream-basic-auth",
+            path = "/consumers/nancy/upstream-basic-auth",
             body = {
               username = "bob",
               password = "kong2"
@@ -83,7 +86,7 @@ describe("Plugin: upstream-basic-auth (API)", function()
               ["Content-Type"] = "application/json"
             }
           })
-          assert.res_status(409, res)
+          assert.res_status(201, res)
         end)
       end)
     end)

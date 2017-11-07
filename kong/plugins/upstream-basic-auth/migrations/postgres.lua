@@ -17,5 +17,14 @@ return {
     down = [[
       DROP TABLE upstreambasicauth_credentials;
     ]]
+  },
+  {
+    name = "2017-11-07-upstream-basic-auth-non-unique-user-name",
+    up =  [[
+      DROP INDEX upstreambasicauth_credentials_i2;
+    ]],
+    down = [[
+      CREATE UNIQUE INDEX IF NOT EXISTS upstreambasicauth_credentials_i2 ON upstreambasicauth_credentials(username);
+    ]]
   }
 }
