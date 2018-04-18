@@ -21,8 +21,6 @@ local pluginName = "upstream-basic-auth"
 build = {
   type = "builtin",
   modules = {
-    ["kong.plugins."..pluginName..".handler"] = "kong/plugins/"..pluginName.."/handler.lua",
-    ["kong.plugins."..pluginName..".schema"] = "kong/plugins/"..pluginName.."/schema.lua",
     ["kong.plugins."..pluginName..".api"] = "kong/plugins/"..pluginName.."/api.lua",
     ["kong.plugins."..pluginName..".daos"] = "kong/plugins/"..pluginName.."/daos.lua",
     ["kong.plugins."..pluginName..".access"] = "kong/plugins/"..pluginName.."/access.lua",
@@ -30,4 +28,3 @@ build = {
     ["kong.plugins."..pluginName..".migrations.postgres"] = "kong/plugins/"..pluginName.."/migrations/postgres.lua",
   }
 }
-
