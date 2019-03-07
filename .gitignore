@@ -1,1 +1,6 @@
 *.src.rock
+
+# IntelliJ
+.idea/
+*.iml
+
