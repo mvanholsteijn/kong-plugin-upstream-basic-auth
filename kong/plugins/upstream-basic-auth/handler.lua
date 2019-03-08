@@ -13,6 +13,6 @@ function BasicAuthInsertHandler:access(conf)
 end
 
 BasicAuthInsertHandler.PRIORITY = 500
-BasicAuthInsertHandler.VERSION = "0.1.0"
+BasicAuthInsertHandler.VERSION = "0.2.0"
 
 return BasicAuthInsertHandler
