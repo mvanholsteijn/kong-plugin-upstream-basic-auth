@@ -87,12 +87,16 @@ kong start
 
 The following matrix lists compatible versions of `Kong` and `upstream-basic-auth` plugin:
 
-| upstream-basic-auth      | 0.1.0              | 0.2.0              |
+| upstream-basic-auth      | 0.1.x              | 0.2.x              |
 |--------------------------|:------------------:|:------------------:|
 | Kong 0.14.x              | :white_check_mark: | :x:                |
 | Kong 1.0.x               | :x:                | :white_check_mark: |
 
 ## Release history
+
+0.2.1
+
+* Fixed performance regression introduced in `v0.2.0`
 
 0.2.0
 
@@ -107,8 +111,7 @@ The following matrix lists compatible versions of `Kong` and `upstream-basic-aut
   * This is a temporary situation until `Kong DAO framework` is improved
   * There is also an option to bring performance back 
     by introducing a synthetic `cache_key` field similarly to `plugins` entity
-* Updated [Example](#example) section to use `Service` and `Routes` objects instead of `APIs`  
-
+* Updated [Example](#example) section to use `Service` and `Routes` objects instead of `APIs`
 
 0.1.0
 

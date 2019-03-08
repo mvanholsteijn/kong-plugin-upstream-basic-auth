@@ -1,22 +1,15 @@
 local _M = {}
 
---- As of Kong v1.0.3, DAO framework doesn't support `select_by_<FIELD>` for fields of type `foreign`.
--- That's why we provide a custom best effort implementation.
 function _M:select_by_consumer(consumer_id)
-  -- TODO(yskopets): Totally inefficient. Must be reworked once DAO framework is improved.
-  -- If scan-based approach is completely unacceptable,
-  -- there is an option to introduce a synthetic `cache_key` field similarly to `plugins` entity.
-  for credential, err in self.super.each(self, 1000) do
-    if err then
-      return nil, err
-    end
-
-    if credential and credential.consumer and credential.consumer.id == consumer_id then
-      return credential
-    end
+  local credentials, err = self.super.page_for_consumer(self, {id = consumer_id}, 1)
+  if err then
+    return nil, err
   end
-
-  return nil
+  if 0 < #credentials then
+    return credentials[1]
+  else
+    return nil
+  end
 end
 
 
