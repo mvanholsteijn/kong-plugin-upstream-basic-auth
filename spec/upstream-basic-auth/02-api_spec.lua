@@ -155,15 +155,6 @@ for _, strategy in helpers.each_strategy() do
           local json = cjson.decode(body)
           assert.equal(credential.id, json.id)
         end)
-        it("retrieves upstream-basic-auth credential by username", function()
-          local res = assert(admin_client:send {
-            method = "GET",
-            path = "/consumers/bob/upstream-basic-auth/" .. credential.username
-          })
-          local body = assert.res_status(200, res)
-          local json = cjson.decode(body)
-          assert.equal(credential.id, json.id)
-        end)
         it("retrieves credential by id only if the credential belongs to the specified consumer", function()
           bp.consumers:insert {
             username = "alice"
@@ -200,22 +191,6 @@ for _, strategy in helpers.each_strategy() do
           local json = cjson.decode(body)
           assert.equal("4321", json.password)
         end)
-        it("updates a credential by username", function()
-
-          local res = assert(admin_client:send {
-            method = "PATCH",
-            path = "/consumers/bob/upstream-basic-auth/" .. credential.username,
-            body = {
-              password = "upd4321"
-            },
-            headers = {
-              ["Content-Type"] = "application/json"
-            }
-          })
-          local body = assert.res_status(200, res)
-          local json = cjson.decode(body)
-          assert.equal("upd4321", json.password)
-        end)
         describe("errors", function()
           it("handles invalid input", function()
             local res = assert(admin_client:send {
@@ -244,13 +219,6 @@ for _, strategy in helpers.each_strategy() do
           assert.res_status(204, res)
         end)
         describe("errors", function()
-          it("returns 404 on missing username", function()
-            local res = assert(admin_client:send {
-              method = "DELETE",
-              path = "/consumers/bob/upstream-basic-auth/blah"
-            })
-            assert.res_status(404, res)
-          end)
           it("returns 404 if not found", function()
             local res = assert(admin_client:send {
               method = "DELETE",
