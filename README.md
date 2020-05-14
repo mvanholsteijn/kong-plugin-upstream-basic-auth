@@ -74,7 +74,7 @@ luarocks install kong-plugin-upstream-basic-auth
 ```
 And add the custom plugin to the `kong.conf` file (e.g. `/etc/kong/kong.conf`)
 ```
-custom_plugins = upstream-basic-auth
+plugins = bundled,upstream-basic-auth
 ```
 Create the required database tables, by running:
 ```
